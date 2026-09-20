@@ -1,0 +1,49 @@
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+
+scrape_configs:
+  - job_name: 'Prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'ProductService'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+        labels:
+          application: 'Product Service Application'
+
+  - job_name: 'OrderService'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8801']
+        labels:
+          application: 'Order Service Application'
+
+  - job_name: 'InventoryService'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8082']
+        labels:
+          application: 'Inventory Service Application'
+
+  - job_name: 'NotificationService'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8083']
+        labels:
+          application: 'Notification Service Application'
+
+  - job_name: 'ApiGateway'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8098']
+        labels:
+          application: 'API Gateway'
+  - job_name: 'DiscoveryService'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8761']
+        labels:
+          application: 'Discovery Service'
